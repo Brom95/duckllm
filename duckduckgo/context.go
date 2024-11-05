@@ -5,9 +5,9 @@ type Context struct {
 	Messages []Message `json:"messages"`
 }
 
-func NewContext() *Context {
+func NewContext(model string) *Context {
 	return &Context{
-		Model:    "gpt-4o-mini",
+		Model:    model,
 		Messages: make([]Message, 0),
 	}
 
