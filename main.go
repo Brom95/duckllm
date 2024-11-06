@@ -41,7 +41,7 @@ func main() {
 	flag.Parse()
 	session := duckduckgo.NewSession(*model)
 	session.Init()
-	if query != nil {
+	if query != nil && len(*query) > 0 {
 		// message := strings.Builder{}
 		if *only_code {
 			*query += "\nprovide only code. No additional comments"
