@@ -15,9 +15,12 @@ Get binary from [releases](https://github.com/Brom95/duckllm/releases) page
 App has several keys:
 
 - `-m` string Model to use [gpt-4o-mini, mistralai/Mixtral-8x7B-Instruct-v0.1, meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo, claude-3-haiku-20240307] (default "gpt-4o-mini")
-- `-r` render output as markdowm. Output is more beautiful but without streaming.
-
+- `-r` render output as markdowm. Output is more beautiful but without streaming (interactive mode only).
+- `-q` query to send in non interactive mode. Can be useful for quick info during terminal session.
+- `-c` try provide  only code in non interactive mode. Useful to pipe output in file. 
 After start you gonna see smth like:
+
+## Interactive mode
 
 ![prompt](docs/prompt.png)
 
@@ -28,3 +31,13 @@ If render mode is on you can see smth like this:
 ![render](docs/render.png)
 
 That's all for know. In case of questions write me: [@brom_samedi](https://t.me/brom_samedi)
+
+## Non interactive mode
+
+You can use `-q` key (with or without `-c`) to get fast info from llm. Using `duckllm` like this is funny but very dangerous:
+
+![ascii generation](docs/duck.png)
+
+Or more useful example:
+
+![iptables](docs/iptables.png)
