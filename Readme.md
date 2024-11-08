@@ -18,9 +18,10 @@ App has several keys:
 - `-r` render output as markdowm. Output is more beautiful but without streaming (interactive mode only).
 - `-q` query to send in non interactive mode. Can be useful for quick info during terminal session.
 - `-c` try provide  only code in non interactive mode. Useful to pipe output in file. 
-After start you gonna see smth like:
+
 
 ## Interactive mode
+After start you gonna see smth like:
 
 ![prompt](docs/prompt.png)
 
