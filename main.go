@@ -32,6 +32,14 @@ func multilineInput() (string, error) {
 	return text, nil
 
 }
+func renderedOutput(c <-chan string) {
+	message := strings.Builder{}
+	for chank := range c {
+		message.WriteString(chank)
+	}
+	fmt.Print(string(markdown.Render(message.String(), 80, 6)))
+}
+
 func main() {
 	model := flag.String("m", "gpt-4o-mini", "Model to use [gpt-4o-mini, mistralai/Mixtral-8x7B-Instruct-v0.1, meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo, claude-3-haiku-20240307]")
 	render := flag.Bool("r", false, "Render output as markdowm")
@@ -47,14 +55,21 @@ func main() {
 			*query += "\nprovide only code. No additional comments"
 		}
 		prev := false
-		for chank := range session.Send(*query) {
+		responseStream := session.Send(*query)
+		if *render {
+			renderedOutput(responseStream)
+		} else {
+			for chank := range responseStream {
 
-			if *only_code && (prev || strings.Contains(chank, "```")) {
-				prev = !prev
-				continue
+				if *only_code && (prev || strings.Contains(chank, "```")) {
+					prev = !prev
+					continue
+				}
+				fmt.Print(chank)
 			}
-			fmt.Print(chank)
+
 		}
+		fmt.Println()
 
 		return
 	}
@@ -66,20 +81,16 @@ func main() {
 			panic(err)
 		}
 		fmt.Print("A: ")
+		responseStream := session.Send(query)
 		if *render {
-			message := strings.Builder{}
-			for chank := range session.Send(query) {
-				message.WriteString(chank)
-			}
-			fmt.Println(string(markdown.Render(message.String(), 80, 6)))
+			renderedOutput(responseStream)
 		} else {
 
-			for chank := range session.Send(query) {
+			for chank := range responseStream {
 
 				fmt.Print(chank)
 			}
 		}
-		fmt.Println()
 		fmt.Println()
 
 	}
