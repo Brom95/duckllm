@@ -9,6 +9,7 @@ import (
 
 	"github.com/Brom95/duckllm/duckduckgo"
 	markdown "github.com/MichaelMure/go-term-markdown"
+	"github.com/yorukot/ansichroma"
 )
 
 func multilineInput() (string, error) {
@@ -33,11 +34,49 @@ func multilineInput() (string, error) {
 
 }
 func renderedOutput(c <-chan string) {
+
+	message := strings.Builder{}
+
+	for chunk := range c {
+		message.WriteString(chunk)
+
+	}
+	fmt.Println(string(markdown.Render(message.String(), 80, 0)))
+
+}
+func codeOutput(c <-chan string, render bool) {
 	message := strings.Builder{}
 	for chank := range c {
 		message.WriteString(chank)
 	}
-	fmt.Print(string(markdown.Render(message.String(), 80, 6)))
+	lang := ""
+	result := strings.Builder{}
+	for _, line := range strings.Split(message.String(), "\n") {
+		if !strings.Contains(line, "```") {
+			if render {
+				result.WriteString(line + "\n")
+
+			} else {
+				fmt.Println(line)
+			}
+		} else {
+			if len(line) > 3 {
+				lang = line[3:]
+			}
+		}
+	}
+	if render {
+		format := lang
+		style := "github"
+		background := "#0d1117"
+		resultString, err := ansichroma.HightlightString(result.String(), format, style, background)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+		fmt.Println(resultString)
+	}
+
 }
 
 func main() {
@@ -49,26 +88,25 @@ func main() {
 	flag.Parse()
 	session := duckduckgo.NewSession(*model)
 	session.Init()
+	if *only_code {
+		*query += "\nprovide only code. No additional comments"
+	}
 	if query != nil && len(*query) > 0 {
+		responseStream := session.Send(*query)
 		// message := strings.Builder{}
 		if *only_code {
-			*query += "\nprovide only code. No additional comments"
-		}
-		prev := false
-		responseStream := session.Send(*query)
-		if *render {
-			renderedOutput(responseStream)
+			codeOutput(responseStream, *render)
 		} else {
-			for chank := range responseStream {
 
-				if *only_code && (prev || strings.Contains(chank, "```")) {
-					prev = !prev
-					continue
+			if *render {
+				renderedOutput(responseStream)
+			} else {
+				for c := range responseStream {
+					fmt.Print(c)
 				}
-				fmt.Print(chank)
 			}
-
 		}
+
 		fmt.Println()
 
 		return
@@ -77,11 +115,13 @@ func main() {
 	for {
 		fmt.Print("Q: ")
 		query, err := multilineInput()
+		responseStream := session.Send(query)
+
 		if err != nil {
 			panic(err)
 		}
 		fmt.Print("A: ")
-		responseStream := session.Send(query)
+
 		if *render {
 			renderedOutput(responseStream)
 		} else {
