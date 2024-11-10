@@ -48,9 +48,9 @@ or with `-r` flag:
 
 ![noninteractive render](docs/n_r.gif)
 
-also with `-c` flag (it was colorized in my terminal :D):
+also with `-c`:
 
-![noninteractive render code only](docs/n_rc.gif)
+![noninteractive render code only](docs/n_rc.png)
 
 # More examples:
 
