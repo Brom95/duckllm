@@ -15,7 +15,7 @@ Get binary from [releases](https://github.com/Brom95/duckllm/releases) page
 App has several keys:
 
 - `-m` string Model to use [gpt-4o-mini, mistralai/Mixtral-8x7B-Instruct-v0.1, meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo, claude-3-haiku-20240307] (default "gpt-4o-mini")
-- `-r` render output as markdown. Output is more beautiful but without streaming. Usually useless in case of copy/past.
+- `-r` render output as markdown (or highlight code in non interactive `-c` mode). Output is more beautiful but without streaming. In interactive mode usually useless in case of copy/past.
 - `-q` query to send in non interactive mode. Can be useful for quick info during terminal session.
 - `-c` try provide  only code in non interactive mode. Useful to pipe output in file. 
 
