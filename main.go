@@ -89,7 +89,6 @@ func main() {
 	render = flag.Bool("r", false, "Render output as markdowm")
 	query = flag.String("q", "", "query to send in non interactive  mode")
 	only_code = flag.Bool("c", false, "Try provide  only code in non interactive mode")
-	_ = only_code
 	flag.Parse()
 	session := duckduckgo.NewSession(*model)
 	session.Init()

@@ -23,19 +23,36 @@ App has several keys:
 ## Interactive mode
 After start you gonna see smth like:
 
-![prompt](docs/prompt.png)
+![prompt](docs/default.gif)
 
 Just insert you question and press return (enter) twice.
 
 If render mode is on you can see smth like this:
 
-![render](docs/render.png)
+![render](docs/default_render.gif)
 
 That's all for know. In case of questions write me: [@brom_samedi](https://t.me/brom_samedi)
 
 ## Non interactive mode
 
-You can use `-q` key (with or without `-c`) to get fast info from llm. Using `duckllm` like this is funny but very dangerous:
+
+
+You can use `-q` key (with or without `-c`) to get fast info from llm.
+![noninteractive no rendering](docs/n_nr.gif)
+
+Use `-c` to try to provide only code:
+
+![noninteractive no rendering code only](docs/n_nrc.gif)
+
+or with `-r` flag:
+
+![noninteractive render](docs/n_r.gif)
+
+also with `-c` flag (it was colorized in my terminal :D):
+
+![noninteractive render code only](docs/n_rc.gif)
+
+# More examples:
 
 ![ascii generation](docs/duck.png)
 
