@@ -32,7 +32,6 @@ If render mode is on you can see smth like this:
 
 ![render](docs/default_render.gif)
 
-That's all for know. In case of questions write me: [@brom_samedi](https://t.me/brom_samedi)
 
 ## Non interactive mode
 
@@ -60,3 +59,7 @@ also with `-c`:
 Or more useful example:
 
 ![iptables](docs/iptables.png)
+
+
+# Contacts
+That's all for now. In case of questions write me: [@brom_samedi](https://t.me/brom_samedi)
