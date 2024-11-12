@@ -1,3 +1,4 @@
+![logo](docs/logo.png)
 # What is it?
 It is a simple console/terminal/cmd (not gui) client for [duckduckgo ai chat](https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1). No registration, no api keys, no sms. Just get and use.
 
