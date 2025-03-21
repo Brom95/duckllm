@@ -85,7 +85,7 @@ var (
 )
 
 func main() {
-	model = flag.String("m", "gpt-4o-mini", "Model to use [gpt-4o-mini, mistralai/Mixtral-8x7B-Instruct-v0.1, meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo, claude-3-haiku-20240307]")
+	model = flag.String("m", "gpt-4o-mini", "Model to use [gpt-4o-mini, o3-mini, mistralai/Mistral-Small-24B-Instruct-2501, meta-llama/Llama-3.3-70B-Instruct-Turbo, claude-3-haiku-20240307]")
 	render = flag.Bool("r", false, "Render output as markdowm")
 	query = flag.String("q", "", "query to send in non interactive  mode")
 	only_code = flag.Bool("c", false, "Try provide  only code in non interactive mode")
